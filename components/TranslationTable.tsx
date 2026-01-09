@@ -42,7 +42,7 @@ export default function TranslationTable({ fields }: TranslationTableProps) {
                     <div className="flex items-center gap-1.5 flex-1">
                       <span className="text-text-primary text-sm">{translation}</span>
                       <button
-                        onClick={() => navigator.clipboard.writeText(translation)}
+                        onClick={() => navigator.clipboard.writeText(translation!)}
                         className="p-1 text-text-secondary hover:text-accent hover:bg-accent/10 rounded transition-colors"
                         title="复制"
                       >
