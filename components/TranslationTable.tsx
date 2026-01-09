@@ -12,9 +12,15 @@ export default function TranslationTable({ fields }: TranslationTableProps) {
   const [copiedFieldId, setCopiedFieldId] = useState<string | null>(null)
 
   const copyAllTranslations = (field: Field) => {
+    const langLabels: Record<string, string> = {
+      'en': '英文',
+      'zh-CN': '简中',
+      'zh-TW': '繁中'
+    }
     const lines = LANGUAGES.map(lang => {
       const value = field.translations[lang.code] || ''
-      return `${lang.code}: ${value}`
+      const label = langLabels[lang.code] || lang.code
+      return `${label}: ${value}`
     })
     const content = `${field.key}\n${lines.join('\n')}`
     navigator.clipboard.writeText(content)
