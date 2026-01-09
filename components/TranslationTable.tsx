@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { Field } from '@/lib/types'
 import { LANGUAGES } from '@/lib/languages'
 
@@ -9,64 +9,17 @@ interface TranslationTableProps {
 }
 
 export default function TranslationTable({ fields }: TranslationTableProps) {
-  const [openExportMenu, setOpenExportMenu] = useState<string | null>(null)
-  const menuRef = useRef<HTMLDivElement>(null)
+  const [copiedFieldId, setCopiedFieldId] = useState<string | null>(null)
 
-  // 点击外部关闭菜单
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setOpenExportMenu(null)
-      }
-    }
-    if (openExportMenu) {
-      document.addEventListener('mousedown', handleClickOutside)
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [openExportMenu])
-
-  const exportFieldAsAndroid = (field: Field) => {
+  const copyAllTranslations = (field: Field) => {
     const lines = LANGUAGES.map(lang => {
       const value = field.translations[lang.code] || ''
-      const escapedValue = value.replace(/'/g, "\\'").replace(/&/g, '&amp;')
-      return `<string name="${field.key}">${escapedValue}</string>`
+      return `${lang.code}: ${value}`
     })
-    const content = lines.join('\n')
-    downloadFile(`${field.key}_android.xml`, content)
-    setOpenExportMenu(null)
-  }
-
-  const exportFieldAsIOS = (field: Field) => {
-    const lines = LANGUAGES.map(lang => {
-      const value = field.translations[lang.code] || ''
-      const escapedValue = value.replace(/"/g, '\\"')
-      return `"${field.key}" = "${escapedValue}"; // ${lang.code}`
-    })
-    const content = lines.join('\n')
-    downloadFile(`${field.key}_ios.strings`, content)
-    setOpenExportMenu(null)
-  }
-
-  const exportFieldAsJSON = (field: Field) => {
-    const data = {
-      key: field.key,
-      translations: field.translations
-    }
-    const content = JSON.stringify(data, null, 2)
-    downloadFile(`${field.key}.json`, content)
-    setOpenExportMenu(null)
-  }
-
-  const downloadFile = (filename: string, content: string) => {
-    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = filename
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    const content = `${field.key}\n${lines.join('\n')}`
+    navigator.clipboard.writeText(content)
+    setCopiedFieldId(field.id)
+    setTimeout(() => setCopiedFieldId(null), 2000)
   }
 
   if (fields.length === 0) {
@@ -88,41 +41,32 @@ export default function TranslationTable({ fields }: TranslationTableProps) {
           <div className="px-3 py-2 bg-background/50 border-b border-border flex items-center justify-between">
             <code className="text-sm font-mono text-text-primary">{field.key}</code>
             
-            {/* 导出按钮 */}
-            <div className="relative" ref={openExportMenu === field.id ? menuRef : undefined}>
-              <button
-                onClick={() => setOpenExportMenu(openExportMenu === field.id ? null : field.id)}
-                className="p-1 text-text-secondary hover:text-accent hover:bg-accent/10 rounded transition-colors"
-                title="导出此字段"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-              </button>
-              
-              {openExportMenu === field.id && (
-                <div className="absolute right-0 top-full mt-1 bg-surface border border-border rounded-lg shadow-lg z-10 min-w-[140px]">
-                  <button
-                    onClick={() => exportFieldAsAndroid(field)}
-                    className="w-full px-3 py-2 text-left text-sm hover:bg-accent/10 transition-colors flex items-center gap-2"
-                  >
-                    <span className="text-green-500">🤖</span> Android XML
-                  </button>
-                  <button
-                    onClick={() => exportFieldAsIOS(field)}
-                    className="w-full px-3 py-2 text-left text-sm hover:bg-accent/10 transition-colors flex items-center gap-2"
-                  >
-                    <span>🍎</span> iOS Strings
-                  </button>
-                  <button
-                    onClick={() => exportFieldAsJSON(field)}
-                    className="w-full px-3 py-2 text-left text-sm hover:bg-accent/10 transition-colors flex items-center gap-2"
-                  >
-                    <span className="text-yellow-500">📄</span> JSON
-                  </button>
-                </div>
+            {/* 一键复制全部翻译 */}
+            <button
+              onClick={() => copyAllTranslations(field)}
+              className={`px-2 py-1 text-xs rounded transition-colors flex items-center gap-1 ${
+                copiedFieldId === field.id 
+                  ? 'bg-green-500/20 text-green-400' 
+                  : 'text-text-secondary hover:text-accent hover:bg-accent/10'
+              }`}
+              title="复制全部翻译"
+            >
+              {copiedFieldId === field.id ? (
+                <>
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  已复制
+                </>
+              ) : (
+                <>
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  复制全部
+                </>
               )}
-            </div>
+            </button>
           </div>
           
           {/* 翻译列表 - 竖向布局 */}
