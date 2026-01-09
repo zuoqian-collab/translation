@@ -282,6 +282,20 @@ export default function FeatureForm({ feature, mode }: FeatureFormProps) {
                 )}
               </div>
             ))}
+
+            {/* 底部快速添加 */}
+            <div className="mt-3 pt-3 border-t border-border/50">
+              <button
+                type="button"
+                onClick={addField}
+                className="w-full py-2 border-2 border-dashed border-border hover:border-accent/50 rounded-lg text-text-secondary hover:text-accent transition-colors flex items-center justify-center gap-2 text-sm"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                添加更多字段
+              </button>
+            </div>
           </div>
         )}
       </div>
