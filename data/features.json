@@ -1,0 +1,174 @@
+{
+  "features": [
+    {
+      "id": "share-feature",
+      "name": "分享功能",
+      "version": "1.3.6",
+      "date": "2026-01-09",
+      "fields": [
+        {
+          "id": "field-feedback-need-more-work",
+          "key": "feedback_need_more_work",
+          "name": "feedback_need_more_work",
+          "translations": {
+            "en": "Need more work",
+            "zh-CN": "可以更好",
+            "zh-TW": "可以更好"
+          }
+        },
+        {
+          "id": "field-feedback-subtitle",
+          "key": "feedback_subtitle",
+          "name": "feedback_subtitle",
+          "translations": {
+            "en": "We read every response. Your input tells us what's working and what to fix next.",
+            "zh-CN": "每一条反馈，我们都会用心聆听。喜欢的话，也可以推荐给朋友。",
+            "zh-TW": "每一條回饋，我們都會用心聆聽。喜歡的話，也可以推薦給朋友。"
+          }
+        },
+        {
+          "id": "field-feedback-title",
+          "key": "feedback_title",
+          "name": "feedback_title",
+          "translations": {
+            "en": "Has FiloMail been helpful?",
+            "zh-CN": "FiloMail对你有帮助吗？",
+            "zh-TW": "FiloMail對你有幫助嗎？"
+          }
+        },
+        {
+          "id": "field-feedback-yes-helpful",
+          "key": "feedback_yes_helpful",
+          "name": "feedback_yes_helpful",
+          "translations": {
+            "en": "Yes, it's helpful",
+            "zh-CN": "不错，值得分享",
+            "zh-TW": "不錯，值得分享"
+          }
+        },
+        {
+          "id": "field-image-save-failed",
+          "key": "image_save_failed",
+          "name": "image_save_failed",
+          "translations": {
+            "en": "Failed to save image",
+            "zh-CN": "保存图片失败",
+            "zh-TW": "儲存圖片失敗"
+          }
+        },
+        {
+          "id": "field-image-saved",
+          "key": "image_saved",
+          "name": "image_saved",
+          "translations": {
+            "en": "Image saved to gallery",
+            "zh-CN": "图片已保存到相册",
+            "zh-TW": "圖片已儲存到相簿"
+          }
+        },
+        {
+          "id": "field-new-todo",
+          "key": "new_todo",
+          "name": "new_todo",
+          "translations": {
+            "en": "New To-do",
+            "zh-CN": "新待办",
+            "zh-TW": "新待辦"
+          }
+        },
+        {
+          "id": "field-past-due",
+          "key": "past_due",
+          "name": "past_due",
+          "translations": {
+            "en": "Past Due",
+            "zh-CN": "逾期待办",
+            "zh-TW": "逾期待辦"
+          }
+        },
+        {
+          "id": "field-save-image",
+          "key": "save_image",
+          "name": "save_image",
+          "translations": {
+            "en": "Save Image",
+            "zh-CN": "保存图片",
+            "zh-TW": "儲存圖片"
+          }
+        },
+        {
+          "id": "field-share",
+          "key": "share",
+          "name": "share",
+          "translations": {
+            "en": "Share",
+            "zh-CN": "分享",
+            "zh-TW": "分享"
+          }
+        },
+        {
+          "id": "field-share-card-load-failed",
+          "key": "share_card_load_failed",
+          "name": "share_card_load_failed",
+          "translations": {
+            "en": "Failed to retrieve shared information",
+            "zh-CN": "获取分享信息失败",
+            "zh-TW": "取得分享資訊失敗"
+          }
+        },
+        {
+          "id": "field-share-failed",
+          "key": "share_failed",
+          "name": "share_failed",
+          "translations": {
+            "en": "Failed to share",
+            "zh-CN": "分享失败",
+            "zh-TW": "分享失敗"
+          }
+        },
+        {
+          "id": "field-share-filomail",
+          "key": "share_filomail",
+          "name": "share_filomail",
+          "translations": {
+            "en": "Share FiloMail",
+            "zh-CN": "分享 FiloMail",
+            "zh-TW": "分享 FiloMail"
+          }
+        },
+        {
+          "id": "field-share-filomail-text",
+          "key": "share_filomail_text",
+          "name": "share_filomail_text",
+          "translations": {
+            "en": "I've been using Filo Mail. It turns emails into summaries & to-dos. 90 days of Plus for both of us if you join:%s",
+            "zh-CN": "我正在使用 Filo Mail。它将邮件转换为摘要和待办事项。如果你加入，我们都可以获得 90 天 Plus 试用：%s",
+            "zh-TW": "我正在使用 Filo Mail。它會將郵件轉為摘要和待辦事項。如果你加入，我們都可以獲得 90 天 Plus 試用：%s"
+          }
+        },
+        {
+          "id": "field-share-image",
+          "key": "share_image",
+          "name": "share_image",
+          "translations": {
+            "en": "Share Image",
+            "zh-CN": "分享图片",
+            "zh-TW": "分享圖片"
+          }
+        },
+        {
+          "id": "field-storage-permission-denied",
+          "key": "storage_permission_denied",
+          "name": "storage_permission_denied",
+          "translations": {
+            "en": "Storage permission denied",
+            "zh-CN": "存储权限被拒绝",
+            "zh-TW": "儲存權限已被拒絕"
+          }
+        }
+      ],
+      "createdAt": "2026-01-09T12:00:00.000Z",
+      "updatedAt": "2026-01-09T05:32:22.624Z"
+    }
+  ]
+}
